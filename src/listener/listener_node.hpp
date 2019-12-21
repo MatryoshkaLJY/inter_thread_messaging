@@ -3,6 +3,7 @@
 
 #include "common/topic.hpp"
 #include "msg/struct.hpp"
+#include <pthread.h>
 
 #include <thread>
 #include <mutex>

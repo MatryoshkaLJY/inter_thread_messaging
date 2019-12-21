@@ -4,10 +4,6 @@
 #include "common/topic.hpp"
 #include "msg/struct.hpp"
 
-#include <thread>
-#include <mutex>
-#include <chrono>
-
 extern Topic<Position, 10> position_topic;
 extern Topic<Velocity, 10> velocity_topic;
 
