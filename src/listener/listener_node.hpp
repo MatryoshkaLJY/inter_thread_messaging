@@ -3,12 +3,6 @@
 
 #include "common/topic.hpp"
 #include "msg/struct.hpp"
-#include <pthread.h>
-
-#include <thread>
-#include <mutex>
-#include <chrono>
-#include <iostream>
 
 extern Topic<Position, 10> position_topic;
 extern Topic<Velocity, 10> velocity_topic;
