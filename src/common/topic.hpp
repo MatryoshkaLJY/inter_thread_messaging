@@ -14,11 +14,11 @@ public:
     Topic();
     ~Topic();
     void update(T msg);
-    void wait(T& msg);
-    int copy(T *dst, int len);
+    void wait(T& msg) const;
+    int copy(T *dst, int len) const;
 private:
     mutable std::shared_mutex mtx;
-    std::condition_variable_any refresh;
+    mutable std::condition_variable_any refresh;
     T msg_buf[CAPACITY];
     int head = 0;
     int size = 0;
@@ -40,27 +40,28 @@ Topic<T, CAPACITY>::~Topic()
 template <typename T, int CAPACITY>
 void Topic<T, CAPACITY>::update(T msg)
 {
-    std::unique_lock<std::shared_mutex> lock(mtx);
+    std::unique_lock lock(mtx);
     head = (head + 1) % CAPACITY;
     msg_buf[head] = msg;
     size < CAPACITY ? size += 1 : size = CAPACITY;
+    lock.unlock();
     refresh.notify_all();
     return;
 }
 
 template <typename T, int CAPACITY>
-void Topic<T, CAPACITY>::wait(T& msg)
+void Topic<T, CAPACITY>::wait(T& msg) const
 {
-    std::unique_lock<std::shared_mutex> lock(mtx);
+    std::shared_lock lock(mtx);
     refresh.wait(lock);
     msg = msg_buf[head];
     return;
 }
 
 template <typename T, int CAPACITY>
-int Topic<T, CAPACITY>::copy(T *dst, int len)
+int Topic<T, CAPACITY>::copy(T *dst, int len) const
 {
-    std::unique_lock<std::shared_mutex> lock(mtx);
+    std::shared_lock lock(mtx);
     int rlen = 0;
     int idx = head;
     len < size ? rlen = len : rlen = size;
