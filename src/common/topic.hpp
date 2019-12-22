@@ -13,7 +13,7 @@ public:
     Topic();
     ~Topic();
     void update(T msg);
-    void wait(T& msg) const;
+    void updateHandle(T& msg) const;
     int copy(T *dst, int len) const;
 private:
     mutable std::mutex mtx;
@@ -49,7 +49,7 @@ void Topic<T, CAPACITY>::update(T msg)
 }
 
 template <typename T, int CAPACITY>
-void Topic<T, CAPACITY>::wait(T& msg) const
+void Topic<T, CAPACITY>::updateHandle(T& msg) const
 {
     std::unique_lock<std::mutex> lock(mtx);
     refresh.wait(lock);

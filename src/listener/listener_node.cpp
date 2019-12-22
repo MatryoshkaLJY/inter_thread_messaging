@@ -23,7 +23,7 @@ void listenerLoop( int id )
     Position pos;
     while (true)
     {
-        position_topic.wait(pos);
+        position_topic.updateHandle(pos);
         printf("thread id: %d time: %ld CPU: %d\n", id, timeBootMs(), sched_getcpu());
         //printf("thread id: %d awake! pos.time_boot_ms=%ld\n", id, pos.time_boot_ms);
     }
