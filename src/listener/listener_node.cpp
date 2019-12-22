@@ -25,7 +25,7 @@ void listenerLoop( int id )
     {
         position_topic.wait(pos);
         printf("thread id: %d time: %ld CPU: %d\n", id, timeBootMs(), sched_getcpu());
-        printf("thread id: %d awake! pos.time_boot_ms=%ld\n", id, pos.time_boot_ms);
+        //printf("thread id: %d awake! pos.time_boot_ms=%ld\n", id, pos.time_boot_ms);
     }
     return;
 }

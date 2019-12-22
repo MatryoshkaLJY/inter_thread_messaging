@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(itm_demo)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -Werror -Wno-psabi")
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -Werror -Wno-psabi")
 set(PLATFORM_LIBS pthread ${CMAKE_DL_LIBS})
 
 include_directories(./src )

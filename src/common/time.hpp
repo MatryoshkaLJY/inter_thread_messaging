@@ -3,8 +3,8 @@
 
 #include <chrono>
 
-int64_t intervalMs( std::chrono::high_resolution_clock::time_point end,
-                    std::chrono::high_resolution_clock::time_point start );
-int64_t timeBootMs( void );
+int64_t intervalMs(std::chrono::high_resolution_clock::time_point end,
+                   std::chrono::high_resolution_clock::time_point start);
+int64_t timeBootMs(void);
 
 #endif
